@@ -1,0 +1,9 @@
+# clj
+target/
+.cpcache/
+.clj-kondo/
+.lsp/
+.nrepl-port
+.tool-versions
+
+layout.edn
