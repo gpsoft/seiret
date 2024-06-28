@@ -58,7 +58,7 @@
      {:pos [(bias-left (+ gap w gap)) gap] :size [(bias-width w) h]}]))
 
 (defn- metrics
-  [{:keys [preset gap edge-factor params]}]
+  [{:keys [preset gap edge-factor params] :or {gap 0 edge-factor *edge-factor* params []}}]
   (if preset
     (binding [*edge-factor* edge-factor]
       (side-by-side gap))
