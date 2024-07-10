@@ -60,7 +60,8 @@
      (find-window a nil)
      (find-window nil a)))
   ([wclass title]
-   (.FindWindow User32/INSTANCE (when wclass (name wclass)) title)))
+   (when (or wclass title)
+     (.FindWindow User32/INSTANCE (when wclass (name wclass)) title))))
 
 (defn window-visible?
   [wnd]
@@ -102,7 +103,7 @@
   (let [buf-len 1024
         buf (char-array buf-len)
         _ (.GetClassName User32/INSTANCE wnd buf buf-len)]
-    (apply str buf)))
+    (apply str (take-while #(not= (int %) 0) buf))))
 
 (defn place-window!
   [wnd pos size]
@@ -162,6 +163,7 @@
  (find-window :Vim)
  (find-window nil "VIM")
  (find-window nil "Emacs")
+ (find-window nil nil)
 
  (let [wnd (find-window :Vim)]
    (window-rect wnd))
